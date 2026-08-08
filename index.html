@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#faf7f5">
+<meta name="description" content="项目宣发展示页 — 项目画像、文案成品与配图">
+<title>宣发橱窗 · 项目展示</title>
+<style>
+:root{
+  --bg:#faf7f5; --surface:#ffffff; --surface-warm:#f1ebe4;
+  --fg:#26221f; --fg-2:#4b443e; --muted:#6b615a;
+  --border:#e6ddd5; --border-soft:#efe8e1;
+  --accent:#e0556e; --accent-on:#fff;
+  --success:#1a7f37; --warn:#b45309;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --radius:14px; --shadow:0 1px 2px rgba(38,34,31,.04),0 4px 16px rgba(38,34,31,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--fg);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:28px 20px 60px;display:flex;flex-direction:column;gap:18px}
+.head{display:flex;align-items:center;gap:12px;padding:6px 2px 2px}
+.head .logo{width:42px;height:42px;border-radius:13px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;flex:none}
+.head h1{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.head p{font-size:12.5px;color:var(--muted)}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:7px 16px;font-size:13.5px;font-weight:600;color:var(--fg-2);cursor:pointer;transition:all .15s;font-family:var(--font)}
+.pill:hover{background:var(--surface-warm)}
+.pill.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px}
+.card h2{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card h2 .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.badge{display:inline-block;padding:1px 10px;border-radius:99px;font-size:11.5px;font-weight:600}
+.badge.draft{background:#fdeaea;color:var(--accent-hover,#c13515)}
+.badge.confirmed{background:#fdf1e2;color:var(--warn)}
+.badge.published{background:#e6f4ea;color:var(--success)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kv{background:var(--bg);border:1px solid var(--border-soft);border-radius:10px;padding:11px 14px}
+.kv .k{font-size:12px;color:var(--muted);margin-bottom:3px}
+.kv .v{font-size:14px;font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{background:var(--surface-warm);border:1px solid var(--border);border-radius:99px;padding:2px 11px;font-size:12.5px;color:var(--fg-2)}
+.copy{background:var(--bg);border:1px solid var(--border-soft);border-radius:12px;padding:16px 18px;white-space:pre-wrap;font-size:14.5px;line-height:1.8;color:var(--fg-2)}
+.cover{width:min(280px,100%);border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);display:block}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:8px}
+.shot img{width:100%;border-radius:10px;border:1px solid var(--border);display:block;aspect-ratio:3/4;object-fit:cover}
+.shot .cap{font-size:11px;color:var(--muted);text-align:center;margin-top:4px}
+.empty{text-align:center;color:var(--muted);padding:60px 20px}
+.empty .big{font-size:42px;display:block;margin-bottom:12px}
+.foot{text-align:center;font-size:12px;color:var(--muted);padding:10px 0 0}
+@media (max-width:640px){
+  .wrap{padding:18px 14px 48px}
+  .grid2{grid-template-columns:1fr}
+  .card{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <span class="logo">📣</span>
+    <div><h1>宣发橱窗</h1><p>项目画像 · 文案成品 · 配图(只读展示)</p></div>
+  </div>
+  <div class="nav" id="nav"></div>
+  <div id="content"></div>
+  <div class="foot">由 Reasonix 宣发流水线生成 · 更新于构建时</div>
+</div>
+<script>
+const PROJECTS = [{"id": "image-compressor", "name": "图小 · 在线图片压缩", "status": "draft", "account": "ai-tools", "profile": {"定位": "免费在线图片压缩工具,浏览器里直接压缩,不装软件、不上传", "核心卖点": ["图片全程留在本机,不上传任何服务器", "压缩 / 改尺寸 / 转格式,一个页面全搞定", "证件照预设:一寸、二寸、身份证、签证尺寸", "支持批量压缩 + 一键打包下载", "手机存相册、电脑存文件,各端顺手", "完全免费,不限次数"], "目标用户": "经常被图片太大困扰的普通人:自媒体博主、电商卖家、办公打工人、传证件照的人", "使用场景": ["发小红书提示图片超大小", "微信传图被压缩成糊图", "网页上传限制 1MB / 2MB", "手机相册爆满想批量瘦身", "报名要一寸/二寸电子照", "图片转成 JPG/PNG/WebP 格式"]}, "draft": {"title": "不懂代码,我用AI做了个压图工具", "body": "报名照片传不上去,折腾了一下午,最后我用 AI 做了个工具解决🤣\n\n先说说背景:公务员报名,系统要照片 20KB-100KB,还要 JPG、白底。手机拍的图动不动几 MB,怎么传都提示超大小,试了好几个工具都要下载软件、要注册,有的还收费。\n\n然后我想,干脆让 AI 帮我做一个吧。我完全不懂代码,就让 AI 一点点教、一点点改,弄了个网页:\n\n图片拖进去 → 填目标大小 → 它给你压到那个 KB 数。一寸二寸身份证尺寸也是预设的,选一下就行。压完直接下载,图片全程在浏览器里,不上传。\n\n免费,不用下载,浏览器打开就能用。\n\n说实话这是我第一次\"做\"工具,居然真能用,还挺有成就感的😌\n\n有同样被照片卡过的姐妹可以试试,链接我放评论区了。", "tags": ["#AI工具", "#不懂代码也能做", "#报名", "#考证", "#图片压缩", "#效率工具", "#普通人做产品"], "cover": "covers/image-compressor-cover.png", "shots": ["shots/ic34-home.png", "shots/ic34-result.png", "shots/ic34-compare.png"]}, "published": null, "updated_at": "2026-08-08"}];
+let current = PROJECTS[0] || null;
+
+const $ = (id) => document.getElementById(id);
+function esc(s){ return String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function badge(s){ const m={draft:'草稿',confirmed:'待发布',published:'已发布'}; return `<span class="badge ${s||'draft'}">${m[s]||s}</span>`; }
+
+function renderNav(){
+  $('nav').innerHTML = PROJECTS.map(p =>
+    `<button class="pill ${current&&current.id===p.id?'active':''}" data-id="${p.id}">${esc(p.name||p.id)}</button>`
+  ).join('') || '<span style="color:var(--muted);font-size:13px">暂无项目</span>';
+  document.querySelectorAll('.pill').forEach(b =>
+    b.addEventListener('click', () => { current = PROJECTS.find(p => p.id === b.dataset.id); renderNav(); renderDetail(); })
+  );
+}
+
+function kv(k, v){ return `<div class="kv"><div class="k">${k}</div><div class="v">${esc(v)||'—'}</div></div>`; }
+
+function renderDetail(){
+  if (!current){ $('content').innerHTML = '<div class="empty"><span class="big">📭</span>暂无项目数据</div>'; return; }
+  const p = current, pr = p.profile||{}, d = p.draft||{};
+  const shots = (d.shots||[]).map(s => {
+    const name = s.split('/').pop();
+    return `<div class="shot"><img loading="lazy" src="${esc(s)}" alt="${esc(name)}"><div class="cap">${esc(name)}</div></div>`;
+  }).join('');
+  const pubInfo = p.published
+    ? `<p style="margin-top:10px;font-size:13px;color:var(--muted)">发布于 ${esc(p.published.date||'')}${p.published.url?' · <a href="'+esc(p.published.url)+'" target="_blank" rel="noopener">查看笔记</a>':''}</p>` : '';
+
+  $('content').innerHTML = `
+    <div class="card">
+      <h2><span class="dot"></span>${esc(p.name||p.id)} ${badge(p.status)}</h2>
+      <div class="grid2">
+        ${kv('定位', pr.定位)}
+        ${kv('目标用户', pr.目标用户)}
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div class="kv"><div class="k">核心卖点</div>
+          <div class="tags">${(pr.核心卖点||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')||'—'}</div>
+        </div>
+        <div class="kv"><div class="k">使用场景</div>
+          <div class="tags">${(pr.使用场景||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')||'—'}</div>
+        </div>
+      </div>
+      ${pubInfo}
+    </div>
+
+    ${d.title || d.body ? `
+    <div class="card">
+      <h2><span class="dot"></span>文案成品</h2>
+      <div style="font-size:17px;font-weight:700;margin-bottom:10px">${esc(d.title)}</div>
+      <div class="copy">${esc(d.body)}</div>
+      ${d.tags && d.tags.length ? `<div class="tags" style="margin-top:12px">${d.tags.map(t=>`<span class="tag">#${esc(t.replace(/^#/,''))}</span>`).join('')}</div>` : ''}
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>配图</h2>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+        ${d.cover ? `<div><img class="cover" src="${esc(d.cover)}" alt="封面"><div class="cap" style="font-size:11px;color:var(--muted);text-align:center;margin-top:5px">封面(3:4)</div></div>` : ''}
+        <div style="flex:1;min-width:220px"><div class="shots">${shots}</div></div>
+      </div>
+    </div>
+    ` : `<div class="card"><h2><span class="dot"></span>文案</h2><p style="color:var(--muted)">该项目还没有文案成品。</p></div>`}
+  `;
+}
+
+renderNav();
+renderDetail();
+</script>
+</body>
+</html>
